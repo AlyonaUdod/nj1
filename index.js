@@ -1,20 +1,4 @@
 const contacts = require('./contacts');
-// const {
-//   listContacts, removeContact, getContactById, addContact
-// } = default;
-
-// contacts.listContacts()
-// contacts.getContactById('rsKkOQUi80UsgVPCcLZZW')
-// contacts.removeContact('rsKkOQUi80UsgVPCcZZW')
-// contacts.addContact('Vasya', 'vasya@gmail.com', '+38066666666')
-
-
-// {
-//   "id": "rsKkOQUi80UsgVPCcLZZW",
-//   "name": "Alec Howard",
-//   "email": "Donec.elementum@scelerisquescelerisquedui.net",
-//   "phone": "(748) 206-2688"
-// }
 
 const { Command } = require('commander');
 const program = new Command();
@@ -29,7 +13,6 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-// TODO: рефакторити
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
@@ -37,11 +20,11 @@ function invokeAction({ action, id, name, email, phone }) {
       break;
 
     case 'get':
-      contacts.getContactById(id) // 'rsKkOQUi80UsgVPCcLZZW'
+      contacts.getContactById(id)
       break;
 
     case 'add':
-      contacts.addContact( name, email, phone ) // 'Vasya', 'vasya@gmail.com', '+38066666666')
+      contacts.addContact( name, email, phone )
       break;
 
     case 'remove':

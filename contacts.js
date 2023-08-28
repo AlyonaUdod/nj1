@@ -4,34 +4,25 @@ const { randomUUID } = require("crypto");
 
 const contactsPath = path.resolve("db", "contacts.json");
 
-// TODO: задокументировать каждую функцию
 function listContacts() {
-  // ...твой код. Возвращает массив контактов.
   fs.readFile(contactsPath)
     .then((data) => {
-      return console.log(data.toString());
+      return console.table(JSON.parse(data.toString()));
     })
     .catch((err) => console.log(err.message));
 }
 
 function getContactById(contactId) {
-  // ...твой код. Возвращает объект контакта с таким id. Возвращает null если объект с таким id не найден.
   fs.readFile(contactsPath)
-    .then(
-      (data) => {
-        return console.log(
-          JSON.parse(data.toString()).find((el) => el.id === contactId) ?? null
-        );
-        // console.log(d.find((el) => el.id === contactId))
-      }
-
-      // console.log(data.toString().find((el) => el.id === contactId))
-    )
+    .then((data) => {
+      return console.log(
+        JSON.parse(data.toString()).find((el) => el.id === contactId) ?? null
+      );
+    })
     .catch((err) => console.log(err.message));
 }
 
 function removeContact(contactId) {
-  // ...твой код. Возвращает объект удаленного контакта. Возвращает null если объект с таким id не найден.
   fs.readFile(contactsPath)
     .then((data) => {
       const item =
@@ -53,15 +44,14 @@ function removeContact(contactId) {
 }
 
 function addContact(name, email, phone) {
-  // ...твой код. Возвращает объект добавленного контакта. Возвращает null если объект с таким id не найден.
   const contact = { id: randomUUID(), name, email, phone };
   fs.readFile(contactsPath)
     .then((data) => {
       const arr = JSON.parse(data.toString());
       arr.push(contact);
-      fs.writeFile(contactsPath, JSON.stringify(arr)).then(() =>
-        console.log(contact)
-      );
+      fs.writeFile(contactsPath, JSON.stringify(arr)).then(() => {
+        return console.log("Successfully added --- ", contact);
+      });
     })
     .catch((err) => console.log(err.message));
 }
