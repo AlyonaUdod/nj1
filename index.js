@@ -22,7 +22,7 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
 
     case "get":
       const item = await contacts.getContactById(id);
-      return console.log(item ?? 'No item with this id', id);
+      return console.log(item);
       break;
 
     case "add":
@@ -32,7 +32,7 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
 
     case "remove":
       const removeItem = await contacts.removeContact(id);
-      return console.log(removeItem ?? `No file with this id `, id)
+      return console.log(removeItem)
       break;
 
     default:
